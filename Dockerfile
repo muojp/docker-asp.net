@@ -24,3 +24,9 @@ RUN yes | certmgr -ssl -m https://nuget.org
 
 # Synchronize trusted root certificates
 RUN mozroots --import --sync --quiet
+
+# Install 'kvm' and latest KRE
+# (this step requires apt-get unzip, but it's included in the list above)
+RUN touch ~/.bash_profile
+RUN curl https://raw.githubusercontent.com/aspnet/Home/master/kvminstall.sh | sh
+RUN /bin/bash -c "source ~/.kre/kvm/kvm.sh && kvm upgrade; echo ExitCode=$?"
