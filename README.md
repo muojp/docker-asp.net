@@ -36,9 +36,12 @@ Unfortuntely, right now the ASP.NET commands like `k`, `kpm` and `kvm` are just 
 
 ### Known issues
 
-* `kvm upgrade` installs the latest KRE successfully but gives a non-successful exit code (=1). This currently breaks the build. ([See issue](https://github.com/aspnet/kvm/issues/31))
+* `kvm upgrade` installs the latest KRE successfully but gives a non-successful exit code (=1). This currently might break the build. ([See issue](https://github.com/aspnet/kvm/issues/31))
 * `k` command terminates just after starting while in the container because it expects some input from STDIN. You should use `docker run -i` to keep the process alive. ([See issue](https://github.com/aspnet/Hosting/issues/59))
 
+### Disclaimer
+
+This project is not affiliated with Microsoft or ASP.NET. It is independently maintained and the purpose is to have a base Docker image where binaries are coming from official Mono & ASP.NET GitHub repositories and versions are carefully picked as stable ones working reliably.
 
 [mono]: https://github.com/mono/mono
 [hub-link]: https://registry.hub.docker.com/u/ahmetalpbalkan/aspnet-vnext/
