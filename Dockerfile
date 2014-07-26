@@ -30,3 +30,9 @@ RUN mozroots --import --sync --quiet
 RUN touch ~/.bash_profile
 RUN curl https://raw.githubusercontent.com/aspnet/Home/master/kvminstall.sh | sh
 RUN /bin/bash -c "source ~/.kre/kvm/kvm.sh && kvm upgrade; echo ExitCode=$?"
+
+# Add symlink to kvm default version
+ADD kvm-symlink.sh /tmp/kvm-symlink.sh
+RUN /bin/bash /tmp/kvm-symlink.sh
+RUN rm /tmp/kvm-symlink.sh
+ENV PATH $PATH:/.kre/packages/default/bin
