@@ -5,7 +5,7 @@ RUN apt-get -qq update
 
 # Install Mono
 RUN apt-get -qqy install libtool autoconf g++ gettext make git unzip && \
-    git clone --depth 1 https://github.com/mono/mono /tmp/mono && \
+    git clone -b mono-3.6.0.39 --single-branch --depth 1 https://github.com/mono/mono /tmp/mono && \
     cd /tmp/mono && \
     ./autogen.sh --prefix=/usr && \
     make get-monolite-latest && \
