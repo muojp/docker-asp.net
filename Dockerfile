@@ -10,10 +10,7 @@ RUN echo "deb http://download.mono-project.com/repo/debian wheezy main" > /etc/a
 RUN apt-get -qq update && apt-get -qqy install mono-complete
 
 # Install ASP.NET vNext certificates
-RUN yes | certmgr -ssl -m https://go.microsoft.com
-RUN yes | certmgr -ssl -m https://nugetgallery.blob.core.windows.net
-RUN yes | certmgr -ssl -m https://myget.org
-RUN yes | certmgr -ssl -m https://nuget.org
+RUN yes | certmgr -ssl -m https://go.microsoft.com https://myget.org https://nuget.org
 RUN mozroots --import --sync --quiet
 
 # Install ASP.NET vNext and latest KRE
