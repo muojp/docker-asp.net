@@ -4,7 +4,7 @@ MAINTAINER Ahmet Alp Balkan <ahmetalpbalkan@gmail.com>
 RUN apt-get -qq update
 
 # Install Mono
-RUN apt-get -qq update && apt-get -qqy install curl
+RUN apt-get -qq update && apt-get -qqy install curl unzip
 RUN curl -s http://download.mono-project.com/repo/xamarin.gpg | apt-key add -
 RUN echo "deb http://download.mono-project.com/repo/debian wheezy main" > /etc/apt/sources.list.d/mono-xamarin.list
 RUN apt-get -qq update && apt-get -qqy install mono-complete
