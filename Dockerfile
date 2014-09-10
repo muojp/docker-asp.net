@@ -14,7 +14,7 @@ RUN yes | certmgr -ssl -m https://go.microsoft.com https://myget.org https://nug
 RUN mozroots --import --sync --quiet
 
 # Install ASP.NET vNext and latest KRE
-RUN curl https://raw.githubusercontent.com/aspnet/Home/dev/kvminstall.sh | sh
+RUN curl -s https://raw.githubusercontent.com/aspnet/Home/dev/kvminstall.sh | sh
 RUN bash -c "source ~/.kre/kvm/kvm.sh && kvm upgrade; echo KvmUpgradeExitCode=$?"
 RUN ln -s ~/.kre/packages/`bash -c "source ~/.kre/kvm/kvm.sh && kvm alias default"` ~/.kre/packages/default
 ENV PATH $PATH:/.kre/packages/default/bin
