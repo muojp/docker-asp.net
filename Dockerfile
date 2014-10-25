@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:wheezy
 MAINTAINER Ahmet Alp Balkan <ahmetalpbalkan@gmail.com>
 
 RUN apt-get -qq update
@@ -9,8 +9,11 @@ RUN curl -s http://download.mono-project.com/repo/xamarin.gpg | apt-key add -
 RUN echo "deb http://download.mono-project.com/repo/debian wheezy main" > /etc/apt/sources.list.d/mono-xamarin.list
 RUN apt-get -qq update && apt-get -qqy install mono-complete
 
-# Install libuv for Kestrel
-RUN apt-get -qq update && apt-get -qqy install libuv0.10
+# Install libuv for Kestrel (from source code. binary provided on jessie is too old)
+RUN apt-get -qq update && apt-get -qqy install git autoconf automake build-essential libtool
+ADD ./install-libuv.sh /tmp/install-libuv.sh
+RUN chmod +x /tmp/install-libuv.sh
+RUN /tmp/install-libuv.sh
 
 # Install ASP.NET vNext certificates
 RUN yes | certmgr -ssl -m https://go.microsoft.com https://myget.org https://nuget.org
