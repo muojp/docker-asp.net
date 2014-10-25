@@ -6,8 +6,8 @@ See the `Dockerfile` for more details about how the image is built. The image is
 
 ### Image build outline
 
-* Base image is `debian:latest`
-* Installs latest stable Mono version (as of writing Mono 3.8.0)
+* Base image is `debian:wheezy`
+* Installs latest stable Mono version (as of writing Mono 3.10.0)
 * Updates the certificate store, installs NuGet/MyGet SSL certificates.
 * Installs the latest ASP.NET vNext (from its `dev` feed).
 
@@ -32,6 +32,10 @@ like this:
 
 While starting your container, please run it with `docker run -t -d` switches since `k` command requires
 TTY to stay alive and `-t` will attach a pseudo-TTY to the process.
+
+Alternatively, you can use Kestrel as a web server. To do this, set your ENTRYPOINT like this:
+
+    ENTRYPOINT k kestrel
 
 ### Disclaimer
 
