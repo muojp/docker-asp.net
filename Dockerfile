@@ -10,10 +10,13 @@ RUN echo "deb http://download.mono-project.com/repo/debian wheezy main" > /etc/a
 RUN apt-get -qq update && apt-get -qqy install mono-complete
 
 # Install libuv for Kestrel (from source code. binary provided on jessie is too old)
-RUN apt-get -qq update && apt-get -qqy install git autoconf automake build-essential libtool
-ADD ./install-libuv.sh /tmp/install-libuv.sh
-RUN chmod +x /tmp/install-libuv.sh
-RUN /tmp/install-libuv.sh
+RUN apt-get -qqy install git autoconf automake build-essential libtool
+RUN cd /usr/local/src && \
+  git clone https://github.com/joyent/libuv.git && \
+  cd libuv && \
+  git checkout v1.0.0-rc2 && \
+  sh autogen.sh && ./configure && make && make install && \
+  ldconfig
 
 # Install ASP.NET vNext certificates
 RUN yes | certmgr -ssl -m https://go.microsoft.com https://myget.org https://nuget.org
