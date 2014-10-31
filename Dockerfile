@@ -11,9 +11,8 @@ RUN apt-get -qq update && apt-get -qqy install mono-complete
 
 # Install libuv for Kestrel (from source code. binary provided on jessie is too old)
 RUN apt-get -qqy install git autoconf automake build-essential libtool
-RUN cd /usr/local/src && \
-  git clone https://github.com/joyent/libuv.git && \
-  cd libuv && \
+RUN git clone https://github.com/joyent/libuv.git /usr/local/src/libuv && \
+  cd /usr/local/src/libuv && \
   git checkout v1.0.0-rc2 && \
   sh autogen.sh && ./configure && make && make install && \
   ldconfig
